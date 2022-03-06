@@ -30,4 +30,8 @@ extension MarvelComicsViewModelTests: ComicsViewModelDelegate {
 		XCTAssertTrue(count > 0)
 		expectation.fulfill()
 	}
+
+	func handleError(message: String) {
+		XCTFail("Error received from view model")
+	}
 }
