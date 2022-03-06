@@ -18,19 +18,35 @@ class MarvelComicsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testImageViewExtension() throws {
+        let imageView = UIImageView()
+		let urlString = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
+		
+		guard let url = URL(string: urlString) else {
+			XCTFail("Invalid URL: \(urlString) ")
+			return
+		}
+		
+		imageView.setImage(from: url)
+		
+		/// Wait for image to be loaded
+		let exp = expectation(description: "Test after 3 seconds")
+		let result = XCTWaiter.wait(for: [exp], timeout: 3.0)
+		if result == XCTWaiter.Result.timedOut {
+			XCTAssertNotNil(imageView.image)
+		}
+		else {
+			XCTFail("Delay Interrupted")
+		}
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+	func testCollectionViewExtension() throws {
+		
+		// Verify reuse identifier is correct
+		XCTAssertEqual(MainComicCollectionViewCell.identifier, "MainComicCollectionViewCell")
+		
+		// Verify nib loaded
+		XCTAssertNotNil(MainComicCollectionViewCell.nib)
+	}
 
 }
