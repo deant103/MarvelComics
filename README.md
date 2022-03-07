@@ -10,4 +10,12 @@ The project is designed using the MVVM architectural pattern. The ComicsViewMode
 
 The Marvel API is accessed using the iOS nativie method. A data task is retrieved from URLSession.  The completion parses the JSON data into the model classes, using JSONDecoder. The data is saved to the view model. The delegate is notified when the model changes, by calling the delegate's didUpdateModel function . It also checks for errors and calls the delegate handleError function if an error has occured. 
 
+This project attempts to improve user experience throught the use of motion through animations. 
+
+Furture Improvements:
+
+Adding a custom view transation when moving from the main view to the detail view would add interest by differing from the norm. 
+
+Although a unit test suite has been started, future increases in code coverage should be undertaken.  
+
 Requires iOS 15
